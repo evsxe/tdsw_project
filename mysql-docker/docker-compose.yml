@@ -1,0 +1,34 @@
+# Версия интерпретатора Python (указываем и забываем)
+version: "3.9"
+# Описание всех серверов MySQL
+services:
+  # Описание master-server
+  mysql-master:
+    # Имя образа MySQL СУБД, скачиваемый из DockerHub (официальный образ)
+    image: 'mysql:8.0'
+    # Имя докер-контейнера (имя запущенного докер-образа, также имя хоста в DNS)
+    container_name: mysql-master
+    # Передача файлов из местной ОС внутрь контейнера
+    volumes:
+      - ./master.cnf:/etc/mysql/my.cnf
+      - ./master.sql:/docker-entrypoint-initdb.d/start.sql
+    # Указываем переменную окружения внутри контейнера
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    # Пробрасываем порт с хостовой машины внутрь докера для воз-можности подключения к СУБД снаружи
+    ports:
+     - '3306:3306'
+  # Описание Slave-server
+  mysql-slave:
+    image: 'percona:8.0'
+    container_name: mysql-slave
+    volumes:
+      - ./slave.cnf:/etc/mysql/my.cnf
+      - ./slave.sql:/docker-entrypoint-initdb.d/start.sql
+    # Указываем, что slave запускается только после успешного за-пуска master
+    depends_on:
+      - mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+     - '3307:3306'
