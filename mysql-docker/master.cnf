@@ -10,3 +10,6 @@ socket     = /var/run/mysqld/mysqld.sock
 datadir     = /var/lib/mysql
 # Параметр определяет, из какой директории можно свободно скачи-вать данные БД (в данном случае скачивать вообще нельзя)
 secure-file-priv = NULL
+
+replicate-do-table=med.organizations
+binlog-do-db=med
