@@ -12,4 +12,13 @@ datadir     = /var/lib/mysql
 secure-file-priv = NULL
 
 replicate-do-table=med.organizations
+replicate-do-table=med.people
+replicate-do-table=med.specializations
+replicate-do-table=med.agreement
+replicate-do-table=med.doctors
+replicate-do-table=med.workers
+replicate-do-table=med.prof_inspections
+replicate-do-table=med.results
+replicate-do-table=med.files
+
 binlog-do-db=med

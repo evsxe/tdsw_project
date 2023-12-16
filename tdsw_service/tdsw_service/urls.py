@@ -21,5 +21,9 @@ from tdsw_web_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("index/", views.index)
+    path("index/", views.index),
+    path("auth/", views.auth),
+    path("init/", views.init),
+    path("get/", views.select_data_for_med_admin),
+    path("report/", views.report)
 ]

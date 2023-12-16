@@ -4,7 +4,7 @@
 import os
 import sys
 
-from sql_scripts.load_data import create_tables, alter_slave
+from sql_scripts.load_data import create_tables, alter_slave, alter_master
 
 
 def main():
@@ -20,6 +20,7 @@ def main():
         ) from exc
 
     create_tables()
+    alter_master()
     alter_slave()
 
     execute_from_command_line(sys.argv)
